@@ -15,7 +15,12 @@ namespace TesteCrud.Models
         public double ValorVenda { get; set; }
         public Fornecedor Fornecedor { get; set; }
 
-        public Produto(int id, string nome, string codBarras, int quantidade, double valorCompra, double valorVenda)
+        public Produto()
+        {
+
+        }
+
+        public Produto(int id, string nome, string codBarras, int quantidade, double valorCompra, double valorVenda, Fornecedor fornecedor)
         {
             Id = id;
             Nome = nome;
@@ -23,6 +28,7 @@ namespace TesteCrud.Models
             Quantidade = quantidade;
             ValorCompra = valorCompra;
             ValorVenda = valorVenda;
+            Fornecedor = fornecedor;
         }
     }
 
