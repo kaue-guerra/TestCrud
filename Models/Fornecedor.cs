@@ -12,6 +12,7 @@ namespace TesteCrud.Models
         public string Telefone { get; set; }
         public string Documento { get; set; }
         public Endereco Endereco { get; set; }
+        public int EnderecoId { get; set; }
 
         public Fornecedor()
         {

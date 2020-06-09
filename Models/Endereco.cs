@@ -15,6 +15,10 @@ namespace TesteCrud.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
 
+        public Endereco(){
+        
+        }
+
         public Endereco(int id, string rua, string numero, string bairro, string pontoReferencia, string cidade, string estado)
         {
             Id = id;

@@ -14,6 +14,7 @@ namespace TesteCrud.Models
         public double ValorCompra { get; set; }
         public double ValorVenda { get; set; }
         public Fornecedor Fornecedor { get; set; }
+        public int FornecedorId { get; set; }
 
         public Produto()
         {

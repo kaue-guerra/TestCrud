@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TesteCrud.Database;
 using TesteCrud.Models;
+using TesteCrud.Services;
 
 namespace TesteCrud.Controllers
 {
     public class FornecedoresController : Controller
     {
         private readonly AppDBContext _context;
+        private readonly EnderecoService _enderecoService;
 
-        public FornecedoresController(AppDBContext context)
+        public FornecedoresController(AppDBContext context, EnderecoService enderecoService)
         {
             _context = context;
+            _enderecoService = enderecoService;
         }
 
         // GET: Fornecedores
@@ -46,7 +49,9 @@ namespace TesteCrud.Controllers
         // GET: Fornecedores/Create
         public IActionResult Create()
         {
-            return View();
+            var enderecos = _enderecoService.FindAll();
+            var viewModel = new FornecedorFormViewModel { Enderecos = enderecos };
+            return View(viewModel);
         }
 
         // POST: Fornecedores/Create

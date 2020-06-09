@@ -1,4 +1,4 @@
-﻿@model TesteCrud.Models.Fornecedor
+﻿@model TesteCrud.Models.FornecedorFormViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,19 +13,23 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NomeFornecedor" class="control-label"></label>
-                <input asp-for="NomeFornecedor" class="form-control" />
-                <span asp-validation-for="NomeFornecedor" class="text-danger"></span>
+                <label asp-for="Fornecedor.NomeFornecedor" class="control-label"></label>
+                <input asp-for="Fornecedor.NomeFornecedor" class="form-control" />
+                <span asp-validation-for="Fornecedor.NomeFornecedor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Telefone" class="control-label"></label>
-                <input asp-for="Telefone" class="form-control" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
+                <label asp-for="Fornecedor.Telefone" class="control-label"></label>
+                <input asp-for="Fornecedor.Telefone" class="form-control" />
+                <span asp-validation-for="Fornecedor.Telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Documento" class="control-label"></label>
-                <input asp-for="Documento" class="form-control" />
-                <span asp-validation-for="Documento" class="text-danger"></span>
+                <label asp-for="Fornecedor.Documento" class="control-label"></label>
+                <input asp-for="Fornecedor.Documento" class="form-control" />
+                <span asp-validation-for="Fornecedor.Documento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fornecedor.Endereco" class="control-label"></label>
+                <select asp-for="Fornecedor.Endereco" asp-items="@(new SelectList(Model.Enderecos, "Id", "Rua"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

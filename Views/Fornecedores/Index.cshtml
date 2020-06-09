@@ -1,27 +1,29 @@
 ﻿@model IEnumerable<TesteCrud.Models.Fornecedor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Fornecedores";
 }
 
-<h1>Index</h1>
+<h1>Fornecedores</h1>
 
 <p>
-    <a asp-action="Create">Novo Fornecedor</a>
+    <a asp-action="Create" class="btn btn-secondary">Novo Fornecedor</a>
 </p>
-<table class="table">
+<table class="table table-striped table-hover" >
     <thead>
-        <tr>
+        <tr class="bg-primary text-white">
             <th>
-                Fornecedor
+                @Html.DisplayNameFor(model => model.NomeFornecedor)
             </th>
             <th>
-                Telefone
+                @Html.DisplayNameFor(model => model.Telefone)
             </th>
             <th>
-                Documento
+                @Html.DisplayNameFor(model => model.Documento)
             </th>
-            <th></th>
+            <th>
+                Ações
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,8 +39,8 @@
                 @Html.DisplayFor(modelItem => item.Documento)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
