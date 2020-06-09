@@ -13,13 +13,12 @@ namespace TesteCrud.Models
         public string Documento { get; set; }
         public Endereco Endereco { get; set; }
 
-        public Fornecedor(int id, string nomeFornecedor, string telefone, string documento, Endereco endereco)
+        public Fornecedor(int id, string nomeFornecedor, string telefone, string documento)
         {
             Id = id;
             NomeFornecedor = nomeFornecedor;
             Telefone = telefone;
             Documento = documento;
-            Endereco = endereco;
         }
     }
 }
