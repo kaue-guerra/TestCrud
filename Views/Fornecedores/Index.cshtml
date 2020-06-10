@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<TesteCrud.Models.Fornecedor>
 
 @{
-    ViewData["Title"] = "Fornecedores";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Fornecedores</h1>
+<h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-secondary">Novo Fornecedor</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-striped table-hover" >
+<table class="table">
     <thead>
-        <tr class="bg-primary text-white">
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.NomeFornecedor)
             </th>
@@ -22,8 +22,21 @@
                 @Html.DisplayNameFor(model => model.Documento)
             </th>
             <th>
-                Ações
+                @Html.DisplayNameFor(model => model.Endereco)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -37,6 +50,21 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

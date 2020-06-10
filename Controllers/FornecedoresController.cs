@@ -5,21 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using TesteCrud.Database;
 using TesteCrud.Models;
-using TesteCrud.Services;
 
 namespace TesteCrud.Controllers
 {
     public class FornecedoresController : Controller
     {
         private readonly AppDBContext _context;
-        private readonly EnderecoService _enderecoService;
 
-        public FornecedoresController(AppDBContext context, EnderecoService enderecoService)
+        public FornecedoresController(AppDBContext context)
         {
             _context = context;
-            _enderecoService = enderecoService;
         }
 
         // GET: Fornecedores
@@ -49,9 +48,7 @@ namespace TesteCrud.Controllers
         // GET: Fornecedores/Create
         public IActionResult Create()
         {
-            var enderecos = _enderecoService.FindAll();
-            var viewModel = new FornecedorFormViewModel { Enderecos = enderecos };
-            return View(viewModel);
+            return View();
         }
 
         // POST: Fornecedores/Create
@@ -59,9 +56,10 @@ namespace TesteCrud.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeFornecedor,Telefone,Documento")] Fornecedor fornecedor)
+        public async Task<IActionResult> Create([Bind("Id,NomeFornecedor,Telefone,Documento,Endereco,Numero,Bairro,Cidade,Estado")] Fornecedor fornecedor)
         {
-            if (ModelState.IsValid)
+           
+            if (ModelState.IsValid && !DocumentExist(fornecedor.Documento))
             {
                 _context.Add(fornecedor);
                 await _context.SaveChangesAsync();
@@ -91,7 +89,7 @@ namespace TesteCrud.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeFornecedor,Telefone,Documento")] Fornecedor fornecedor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomeFornecedor,Telefone,Documento,Endereco,Numero,Bairro,Cidade,Estado")] Fornecedor fornecedor)
         {
             if (id != fornecedor.Id)
             {
@@ -153,6 +151,11 @@ namespace TesteCrud.Controllers
         private bool FornecedorExists(int id)
         {
             return _context.Fornecedor.Any(e => e.Id == id);
+        }
+
+        private bool DocumentExist(string documento)
+        {
+            return _context.Fornecedor.Any(x => x.Documento == documento);
         }
     }
 }

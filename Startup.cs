@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 using TesteCrud.Database;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
-using TesteCrud.Services;
 
 namespace TesteCrud
 {
@@ -32,7 +31,6 @@ namespace TesteCrud
             services.AddControllersWithViews();
 
             services.AddScoped<SeedingService>();
-            services.AddScoped<EnderecoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,6 +8,5 @@ namespace TesteCrud.Models
     public class FornecedorFormViewModel
     {
         public Fornecedor Fornecedor { get; set; }
-        public ICollection<Endereco> Enderecos { get; set; }
     }
 }

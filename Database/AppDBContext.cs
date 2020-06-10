@@ -11,7 +11,6 @@ namespace TesteCrud.Database
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) {}
 
-        public DbSet<Endereco> Endereco  { get; set; }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<Produto> Produto { get; set; }
     }

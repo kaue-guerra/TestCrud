@@ -17,18 +17,13 @@ namespace TesteCrud.Database
 
         public void Seed()
         {
-            if(_context.Endereco.Any() || _context.Fornecedor.Any() || _context.Produto.Any())
+            if(_context.Fornecedor.Any() || _context.Produto.Any())
             {
                 return; // Banco de dados ja tem registros.
             }
-
-            Endereco e1 = new Endereco(1, "Rua Dom Expedito Lopes", "2125", "Centro", "Prox a praça", "Fortaleza", "CE");
-            Endereco e2 = new Endereco(2, "Rua Pedro Pereira", "25", "Centro", "Prox a estação de trem", "Fortaleza", "CE");
-            Endereco e3 = new Endereco(3, "Av Perimetral", "2055", "Mondubim", "Ao lado do campo", "Fortaleza", "CE");
-
-            Fornecedor f1 = new Fornecedor(1, "M dias Branco", "(85)3411-2051", "1234567891234", e3);
-            Fornecedor f2 = new Fornecedor(2, "Fabrica Fortaleza", "(85)3411-2052", "1234567891235", e1);
-            Fornecedor f3 = new Fornecedor(3, "Camil", "(85)3411-2053", "1234567891236", e2);
+            Fornecedor f1 = new Fornecedor(1, "M dias Branco", "(85)3411-2051", "1234567891234","Avenida Perimetral","22", "Mondubim", "Fortaleza", "Ceará");
+            Fornecedor f2 = new Fornecedor(2, "Fabrica Fortaleza", "(85)3411-2052", "1234567891235", "Avenida contorno sul", "1200", "Conjunto Esperança", "Fortaleza", "Ceará");
+            Fornecedor f3 = new Fornecedor(3, "Camil", "(85)3411-2053", "1234567891236", "Rua Dom Expedito Lopes", "148", "Aldeota", "Fortaleza", "Ceará");
 
             Produto p1 = new Produto(1, "Arroz", "123", 5, 3.00, 5.00, f1);
             Produto p2 = new Produto(2, "Feijao", "124", 8, 5.00, 8.00, f1);
@@ -37,7 +32,7 @@ namespace TesteCrud.Database
             Produto p5 = new Produto(5, "Farinha", "127", 14, 3.75, 5.00, f3);
 
 
-            _context.Endereco.AddRange(e1, e2, e3);
+            
             _context.Fornecedor.AddRange(f1, f2, f3);
             _context.Produto.AddRange(p1, p2, p3, p4, p5);
 

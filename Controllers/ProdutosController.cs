@@ -56,7 +56,7 @@ namespace TesteCrud.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,CodBarras,Quantidade,ValorCompra,ValorVenda")] Produto produto)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !CodBarrasExist(produto.CodBarras))
             {
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
@@ -148,6 +148,10 @@ namespace TesteCrud.Controllers
         private bool ProdutoExists(int id)
         {
             return _context.Produto.Any(e => e.Id == id);
+        }
+        private bool CodBarrasExist(string codbarras)
+        {
+            return _context.Produto.Any(x => x.CodBarras == codbarras);
         }
     }
 }
