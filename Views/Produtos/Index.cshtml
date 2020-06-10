@@ -1,13 +1,24 @@
 ﻿@model IEnumerable<TesteCrud.Models.Produto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Produtos";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Novo Produto</a>
+</p>
+
+<p>
+    Pesquisar
+    @using (Html.BeginForm("Index", "Produtos", FormMethod.Get))
+    {
+
+        @Html.TextBox("Pesquisa")
+        <input type="submit" value="Pesquisar" />
+
+    }
 </p>
 <table class="table">
     <thead>
@@ -49,9 +60,9 @@
                 @Html.DisplayFor(modelItem => item.ValorVenda)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
             </td>
         </tr>
 }

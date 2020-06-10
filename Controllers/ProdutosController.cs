@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TesteCrud.Database;
 using TesteCrud.Models;
+using TesteCrud.Models.ViewModels;
 
 namespace TesteCrud.Controllers
 {
@@ -20,9 +21,16 @@ namespace TesteCrud.Controllers
         }
 
         // GET: Produtos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string pesquisa)
         {
-            return View(await _context.Produto.ToListAsync());
+            var q = _context.Produto.AsQueryable();
+            if (!string.IsNullOrEmpty(pesquisa))
+            {
+                q = q.Where(c => c.Nome.Contains(pesquisa) || c.CodBarras.Contains(pesquisa));
+                q = q.OrderBy(c => c.Nome);
+
+            }
+            return View(await q.ToListAsync());
         }
 
         // GET: Produtos/Details/5
@@ -46,7 +54,9 @@ namespace TesteCrud.Controllers
         // GET: Produtos/Create
         public IActionResult Create()
         {
-            return View();
+            var fornecedores = _context.Fornecedor.ToList();
+            var viewModel = new ProdutoFormViewModel { Fornecedores = fornecedores };
+            return View(viewModel);
         }
 
         // POST: Produtos/Create
@@ -54,7 +64,7 @@ namespace TesteCrud.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,CodBarras,Quantidade,ValorCompra,ValorVenda")] Produto produto)
+        public async Task<IActionResult> Create([Bind("Id,Nome,CodBarras,Quantidade,ValorCompra,ValorVenda,FornecedorId")] Produto produto)
         {
             if (ModelState.IsValid && !CodBarrasExist(produto.CodBarras))
             {
@@ -78,7 +88,9 @@ namespace TesteCrud.Controllers
             {
                 return NotFound();
             }
-            return View(produto);
+            List<Fornecedor> fornecedores = _context.Fornecedor.ToList();
+            ProdutoFormViewModel viewModel = new ProdutoFormViewModel { Produto = produto, Fornecedores = fornecedores };
+            return View(viewModel);
         }
 
         // POST: Produtos/Edit/5
@@ -86,7 +98,7 @@ namespace TesteCrud.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,CodBarras,Quantidade,ValorCompra,ValorVenda")] Produto produto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,CodBarras,Quantidade,ValorCompra,ValorVenda,FornecedorId")] Produto produto)
         {
             if (id != produto.Id)
             {
@@ -144,7 +156,6 @@ namespace TesteCrud.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool ProdutoExists(int id)
         {
             return _context.Produto.Any(e => e.Id == id);

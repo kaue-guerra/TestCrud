@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,8 @@ namespace TesteCrud.Models
     public class Fornecedor
     {
         public int Id { get; set; }
+
+        [Display(Name = "Fornecedor")]
         public string NomeFornecedor { get; set; }
         public string Telefone { get; set; }
         public string Documento { get; set; }

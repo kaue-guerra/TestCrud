@@ -22,9 +22,16 @@ namespace TesteCrud.Controllers
         }
 
         // GET: Fornecedores
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( string pesquisa)
         {
-            return View(await _context.Fornecedor.ToListAsync());
+            var q = _context.Fornecedor.AsQueryable();
+            if (!string.IsNullOrEmpty(pesquisa))
+            {
+                q = q.Where(c => c.NomeFornecedor.Contains(pesquisa) || c.Documento.Contains(pesquisa));
+                q = q.OrderBy(c => c.NomeFornecedor);
+               
+            }
+            return View(await q.ToListAsync());
         }
 
         // GET: Fornecedores/Details/5
@@ -147,6 +154,7 @@ namespace TesteCrud.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool FornecedorExists(int id)
         {
